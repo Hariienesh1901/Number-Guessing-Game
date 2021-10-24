@@ -1,22 +1,36 @@
-import random
+# This is a simple number guessing game.
 
-startRange = int(input("Enter the starting range: "))
-endRange = int(input("Enter the ending range: "))
-attempt = int(input("Enter the number of attempts: "))
+# Import the random module.
+from random import randint
+from colorama import Fore, Style
 
-randomNumber = random.randint(startRange, endRange)
+# Asking user required questions.
+startRange = int(input(Fore.LIGHTBLUE_EX + "Enter the starting range: "))
+endRange = int(input(Fore.LIGHTBLUE_EX + "Enter the ending range: "))
+attempts = int(input(Fore.LIGHTBLUE_EX + "Enter the number of attempts: "))
 
+# Generating a random number.
+randomNumber = randint(startRange, endRange)
+
+# Calculating the number of attempts.
 tries = 0
 
-while tries < attempt:
-    guess = int(input("Enter your guess: "))
-    tries += 1
+# Looping the game if they have more attempts.
+while tries < attempts:
+    # Ask user to guess the number.
+    guess = int(input(Fore.LIGHTCYAN_EX + "Guess the number: "))
+
     if guess == randomNumber:
-        print(f"You guessed the correct number! In {tries} tries.")
+        print(f"{Fore.GREEN} You guessed the number! In {tries} tries.")
+        tries += 1
         break
-    elif guess < randomNumber:
-        print("Your guess is too low!")
+    elif guess > randomNumber:
+        print(Fore.MAGENTA + "Your guess is too high!")
+        tries += 1
     else:
-        print("Your guess is too high!")
+        print(Fore.MAGENTA + "Your guess is too low!")
+        tries += 1
+
+# If they don't have any more attempts, tell them they lost.
 else:
-    print("You are out of tries!")
+    print(Fore.RED + "You lost!")
